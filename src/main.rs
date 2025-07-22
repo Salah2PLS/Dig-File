@@ -42,7 +42,7 @@ impl Config {
             } else if arg == "-v" {
                 dont_panic = true;
                 help_or_version = true;
-                println!("DigFile {}\nLicensed under MIT Licese, ©2025 Salah Al-Refaai", VERSION)
+                println!("DigFile {}\nLicensed under Apache v2.0 Licese, ©2025 Salah Al-Refaai", VERSION)
             } else if arg == "-r" {
                 todo!("cannot use regex right now, but its comming soon (if this project continued)")
             } else if arg == "-h" {
