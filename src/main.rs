@@ -2,13 +2,13 @@
  * ================== warning! ==================
  * The original code was written by Federico from
  * the Rustfully YouTube channel, and this is a -
- * small fork of Federico's code, called dig-file
+ * small fork of Federico's code, called tiaf.
+ *       "Text In A File" ---------------^^^^
  *
  *          (sorry if my english is bad)
  * ==============================================
  */
 
- /* warn: The code is still full of errors */
 use std::{
     env,
     fs::File,
@@ -48,13 +48,13 @@ impl Config {
             } else if arg == "-h" {
                 dont_panic = true;
                 help_or_version = true;
-                println!("----------- Dig-File Help -----------");
-                println!("digfile *args");
+                println!("-----------   TIAF - Help   -----------");
+                println!("~ $ tiaf *args");
                 println!("   -h: Help,   print this message.");
                 println!("   -v: Ver.,   print the Version.");
                 println!("   -i: Ignore, ignore char case.");
-                println!("   -r: Regex,  search using Regex instead of normal String (todo!)");
-                println!("----------- Dig-File Help -----------");
+                println!("   -r: Regex,  search using Regex inst-\n             instead of normal String (todo!)");
+                println!("---------------------------------------");
             } else {
                 non_flag_args.push(arg.clone());
             }
@@ -181,4 +181,4 @@ fn main() -> Result<(), String> { // the whole fًunction SALAH PATCHed
     Ok(())
 }
 
-/* warn: The code is still full of errors */
+/* warn: The code is still full (not full, 6-12 bug idk) of errors */
