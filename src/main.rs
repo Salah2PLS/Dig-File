@@ -9,6 +9,8 @@
  * ==============================================
  */
 
+// TODO: regex, improve output, more options for the output
+
 use std::{
     env,
     fs::File,
@@ -42,7 +44,7 @@ impl Config {
             } else if arg == "-v" {
                 dont_panic = true;
                 help_or_version = true;
-                println!("DigFile {}\nLicensed under Apache v2.0 Licese, ©2025 Salah Al-Refaai", VERSION)
+                println!("TIAF {}\nLicensed under Apache v2.0 Licese, ©2025 Salah Al-Refaai", VERSION)
             } else if arg == "-r" {
                 todo!("cannot use regex right now, but its comming soon (if this project continued)")
             } else if arg == "-h" {
@@ -76,7 +78,7 @@ impl Config {
         // Should be fixed:
         // Triggered in the rare case the user types: cargo run -- -i -i
         if non_flag_args.is_empty() && !dont_panic {
-            return Err("Error: Pattern not provided.".to_string());
+            return Err("Error: Pattern not provided.".red().to_string());
         }
         
         let pattern;
@@ -84,7 +86,7 @@ impl Config {
         if !help_or_version { pattern = non_flag_args[0].clone();}
         else { pattern = String::from("") }
         if non_flag_args.len() < 2 && !dont_panic {
-            return Err("Error: No input files provided.".to_string());
+            return Err("Error: No input files provided.".red().to_string());
         }
 
         let files = non_flag_args[1..].to_vec();
@@ -152,12 +154,12 @@ fn grep_file(file: &str, config: &Config) {
             grep(&mut reader, &config.pattern, config.case_insensitive);
         }
         Err(e) => {
-            eprintln!("Could not open file: '{}': {}", file, e);
+            eprintln!("{}: '{}', {}", "Could not open file".red(), file, e);
         }
     }
 }
 
-fn main() -> Result<(), String> { // the whole fًunction SALAH PATCHed
+fn main() -> Result<(), String> { // the whole function SALAH PATCHed
     let args: Vec<String> = env::args().collect();
     let config = Config::new(&args)?;
     //let more_than_one_file: bool = false;
@@ -168,8 +170,8 @@ fn main() -> Result<(), String> { // the whole fًunction SALAH PATCHed
     }
 
     for file in &config.files {
-        if repeating { println!("{} \"{}\"", "...done. now grepping:".cyan(), file) }
-        else         { println!("{} \"{}\"", "grepping".cyan(), file) }
+        if repeating { println!("{} \"{}\"", "...done. now searching in:".cyan(), file) }
+        else         { println!("{} \"{}\"", "Searching in: ".cyan(), file) }
         grep_file(file, &config);
 
         if *&config.files.len() > 1 {
@@ -181,4 +183,3 @@ fn main() -> Result<(), String> { // the whole fًunction SALAH PATCHed
     Ok(())
 }
 
-/* warn: The code is still full (not full, 6-12 bug idk) of errors */
